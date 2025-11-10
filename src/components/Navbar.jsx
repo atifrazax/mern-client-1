@@ -10,7 +10,7 @@ export default function Navbar() {
     e.preventDefault();
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/logout`, {
-        method: 'GET',
+        method: 'POST',
         credentials: 'include',
     });
     const data = await res.json();
