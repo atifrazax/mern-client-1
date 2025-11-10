@@ -10,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     if (location.state?.message) {
@@ -18,6 +19,7 @@ export default function Login() {
   }, [location.state]);
     const handleSubmit = async (e) => {
       e.preventDefault();
+      setLoading(true);
       
       try {
         if (!email || !password || !role) {
@@ -38,6 +40,8 @@ export default function Login() {
       } catch (error) {
         setMessage(error.message);
         // console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -60,7 +64,14 @@ export default function Login() {
 
                     {message && <small className='text-red-custom'>{message}</small>}
 
-                    <button className='shadow py-2 px-10 rounded-lg bg-gray-custom text-white hover:bg-red-custom transition-all'>Sign In</button>
+                    <button 
+                    disabled={loading} 
+                    type="submit" 
+                    className='shadow py-2 px-10 rounded-lg bg-gray-custom
+                     text-white hover:bg-red-custom transition-all
+                     duration-300 disabled:opacity-50 disabled:cursor-not-allowed
+                     '>Sign In
+                     </button>
 
                     <span className='text-center text-gray-400'>Don't have an account? <Link to="/signup" className='text-red-custom'>Sign Up</Link></span>
                  </form>

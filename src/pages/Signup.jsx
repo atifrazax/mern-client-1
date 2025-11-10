@@ -9,9 +9,11 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
           const csrfToken = await getCsrfToken(); // Get the CSRF token
 
@@ -32,6 +34,8 @@ export default function Signup() {
         } catch (error) {
           setMessage(error.message);
           // console.log(error); 
+        } finally {
+          setLoading(false);
         }
         
       }
@@ -56,7 +60,11 @@ export default function Signup() {
 
                     {message && <small className='text-red-custom'>{message}</small>}
 
-                    <button type="submit" className='shadow py-2 px-10 rounded-lg sm:mx-auto bg-gray-custom text-white hover:bg-red-custom transition-all'>Create Account</button>
+                    <button type="submit" disabled={loading} 
+                    className='shadow py-2 px-10 rounded-lg sm:mx-auto bg-gray-custom 
+                    text-white hover:bg-red-custom transition-all disabled:opacity-50 disabled:cursor-not-allowed
+                    '>Create Account
+                    </button>
 
                     <span className='text-center text-gray-400'>Already have an account? <Link to="/" className='text-red-custom'>Sign In</Link></span>
 
