@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: false;
+}
+
+@theme {
+    /* --color-primary: #ff0000; */
+    --color-primary: #f1a501;
+    --color-secondary: #181e4b;
+    --color-red-custom: #df6951;
+    --color-gray-custom: #5e6282;
+}
+
+
+@layer base {
+
+    body {
+        font-family: 'Figtree', sans-serif;
+        font-weight: 500;
+        color: var(--color-gray-custom)
+    }
+
+    h1, h2 {
+        font-family: 'Merriweather', sans-serif;
+        font-weight: 700
+    }
+    h1 {
+        
+        @apply text-5xl font-bold ;
+    }
+    h2 {
+        
+        @apply text-4xl font-bold text-black;
+    }
+    h5 {
+        @apply text-2xl font-semibold text-black;
+    }
+  
+  
+}
+
+@keyframes moveAround {
+    0% {
+      transform: translate(0, 0)
+    }
+    25% {
+      transform: translate(100%, 0)
+    }
+    50% {
+      transform: translate(100%, 100%)
+    }
+    75% {
+      transform: translate(0, 100%)
+    }
+    100% {
+      transform: translate(0, 0)
+    }
+  }
