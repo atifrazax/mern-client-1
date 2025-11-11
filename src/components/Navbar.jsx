@@ -16,7 +16,8 @@ export default function Navbar() {
     const data = await res.json();
     if(!res.ok) throw new Error('Error: ' + data.message);
     setUser(null);
-    navigate('/');
+    user.role === 'admin' ? navigate('/admin', {state: {message: 'You have been logged out successfully.'}}) : 
+                            navigate('/', {state: {message: 'You have been logged out successfully.'}});
     } catch (error) {
       console.log(error); 
     }

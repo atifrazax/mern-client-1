@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 
-export default function Login() {
+export default function AdminSignin() {
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -21,12 +21,12 @@ export default function Login() {
       setLoading(true);
       
       try {
-        if (!email || !password) {
+        if (!email || !password ) {
           setMessage("All fields are required");
           return;
         }
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/signin`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export default function Login() {
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.message || "Login failed");
+        if (!res.ok) throw new Error(data.message || "Sign-In failed");
         navigate("/profile");
       } catch (error) {
         setMessage(error.message);
@@ -48,12 +48,12 @@ export default function Login() {
     <section>
         <div className='container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 h-screen'>
             <div className='grid place-content-center sm:w-1/2 mx-auto bg-white shadow-2xl rounded-2xl p-10'>
-                <h1 className='text-red-custom mb-15 text-center'>Sign In</h1>
+                <h1 className='text-red-custom mb-15 text-center'>Admin Sign-In</h1>
                  <form onSubmit={handleSubmit} className='flex flex-col gap-4 relative'>
 
                     <input value={email} onChange={e=>setEmail(e.target.value)} id='email' type="email" placeholder='Your Email' className='shadow py-4 px-10 rounded-lg'/>
 
-                    <input value={password} onChange={e=>setPassword(e.target.value)} id='password' type="password" placeholder='Your Password' className='shadow py-4 px-10 rounded-lg'/>
+                    <input value={password} onChange={e=>setPassword(e.target.value)} id='password' type="password" placeholder='Your Password' className='shadow py-4 px-10 rounded-lg mb-4'/>
 
                     {message && <small className='text-red-custom'>{message}</small>}
 
@@ -66,7 +66,6 @@ export default function Login() {
                      '>Sign In
                      </button>
 
-                    <span className='text-center text-gray-400'>Don't have an account? <Link to="/signup" className='text-red-custom'>Sign Up</Link></span>
                  </form>
             </div>
         </div>

@@ -4,7 +4,7 @@ import Signin from './pages/Signin'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
-// import ProtectedRoute from './components/ProtectedRoute'
+import AdminSignin from './pages/AdminSigin'
 
 
 function App() {
@@ -19,12 +19,8 @@ function App() {
       <Route path="/" element={<Signin />}/>
       <Route path="/signup" element={<Signup />}/>
       <Route path="/profile" element={<Profile />}/>
-      
-        {/* <Route path="/profile" element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-            }/> */}
+      <Route path="/admin" element={<AdminSignin />}/>
+
       <Route path="*" element={<h2>Page not found</h2>}/>
       
     </Routes>

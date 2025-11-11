@@ -7,7 +7,6 @@ export default function Signup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -24,7 +23,7 @@ export default function Signup() {
               'Content-Type': 'application/json',
               'x-csrf-token': csrfToken, // Send the CSRF token
              },
-            body: JSON.stringify({ name, email, password, role }),
+            body: JSON.stringify({ name, email, password }),
           })
           const data = await res.json();
           if(!res.ok) throw new Error(data.message || "Signup failed. Please try again");
@@ -51,13 +50,7 @@ export default function Signup() {
                     <input value={email} onChange={e=>setEmail(e.target.value)} id='email' type="email" placeholder='Your Email' className='shadow py-4 px-10 rounded-lg bg-white'/>
 
                     <input value={password} onChange={e=>setPassword(e.target.value)} id='password' type="password" placeholder='Your Password' className='shadow py-4 px-10 rounded-lg bg-white'/>
-
-                    <select name="role" id="role" className='shadow py-4 px-10 rounded-lg mb-2' onChange={e=>setRole(e.target.value)}>
-                      <option>Role</option>
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                    </select>
-
+                    
                     {message && <small className='text-red-custom'>{message}</small>}
 
                     <button type="submit" disabled={loading} 
